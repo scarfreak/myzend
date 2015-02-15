@@ -1,4 +1,4 @@
-Never Gonna Be Alone
+"Never Gonna Be Alone"
 
 [Verse 1]
 Time, is going by, so much faster than I,
