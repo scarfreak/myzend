@@ -1,0 +1,39 @@
+<?php
+$title = "Pooling Demo";
+$this->headTitle($title);
+?>
+<?php $counter=0; foreach ($poolcounts as $poolcount) :
+     $counter = $counter + 1;
+endforeach; ?>
+<h1 style="text-indent: 0.2cm;">Total Voters:&nbsp;<?php echo $counter; ?></h1>
+<p style="text-indent: 0.4cm;">
+	<a href="<?php echo $this->url('pool', array('action'=>'choose'));?>">Choose your favorite browser</a>
+</p>
+<dl class="sub-nav">
+<dt>Filter:</dt>
+<dd class="active"><a href="<?php echo $this->url('pool');?>">All</a></dd>
+<dd><a href="<?php echo $this->url('pool', array('action'=>'browser', 'id' => 'Chrome'));?>">Chrome</a></dd>
+<dd><a href="<?php echo $this->url('pool', array('action'=>'browser', 'id' => 'Safari'));?>">Safari</a></dd>
+<dd><a href="<?php echo $this->url('pool', array('action'=>'browser', 'id' => 'Firefox'));?>">Firefox</a></dd>
+<dd><a href="<?php echo $this->url('pool', array('action'=>'browser', 'id' => 'IExplorer'));?>">IExplorer</a></dd>
+<dd><a href="<?php echo $this->url('pool', array('action'=>'browser', 'id' => 'Opera'));?>">Opera</a></dd>
+<dd class-"hide-for-small-only"><a href="<?php echo $this->url('pool', array('action'=>'browser', 'id' => 'Lynx'));?>">Lynx</a></dd>
+</dl>
+ <table class="table">
+ <tr>
+     <th>Name</th>
+     <th>Email</th>
+     <th>Browser</th>
+     <th>Reason</th>
+     <th>Time Voted</th>
+ </tr>
+ <?php foreach ($pools as $pool) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($pool->name);?></td>
+     <td><?php echo $this->escapeHtml($pool->emailadd);?></td>
+     <td><?php echo $this->escapeHtml($pool->browser);?></td>
+     <td><?php echo $this->escapeHtml($pool->reason);?></td>
+     <td><?php echo $this->escapeHtml($pool->timevote);?></td>
+ </tr>
+ <?php endforeach; ?>
+ </table>

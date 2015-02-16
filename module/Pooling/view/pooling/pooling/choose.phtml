@@ -1,0 +1,66 @@
+<?php
+
+$title = 'Choose Browser';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form->setAttribute('action', $this->url('pool', array('action' => 'choose')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+echo '<table style="border:0px;" width="500px">
+<tr>
+<td>';
+
+echo '<div class="row">';
+echo '<div class="large-6 columns">';
+echo '<label>Choose Your Favorite:</label>';
+echo $this->formHidden($form->get('id'));
+//echo $this->formRow($form->get('browser'));
+echo $this->formElement($form->get('browser'));
+echo $this->formElementErrors($form->get('browser'));
+echo '</div>';
+echo '</div>';
+
+echo '<div class="row">';
+echo '<div class="large-3 columns">';
+echo '<label>Name:</label>';
+// echo $this->formRow($form->get('name'));
+echo $this->formElement($form->get('name'));
+echo $this->formElementErrors($form->get('name'));
+echo '</div>';
+echo '</div>';
+
+echo '<div class="row">';
+echo '<div class="large-3 columns">';
+echo '<label>Email Address:</label>';
+// echo $this->formRow($form->get('emailadd'));
+echo $this->formElement($form->get('emailadd'));
+echo $this->formElementErrors($form->get('emailadd'));
+echo '</div>';
+echo '</div>';
+
+echo '<div class="row">';
+echo '<div class="large-7 columns">';
+echo '<label>Reason:</label>';
+// echo $this->formRow($form->get('reason'));
+echo $this->formElement($form->get('reason'));
+echo $this->formElementErrors($form->get('reason'));
+echo '</div>';
+echo '</div>';
+
+echo '<div class="row">';
+echo '<div class="large-7 columns">';
+// echo '<div class="button small">';
+echo $this->formSubmit($form->get('submit'));
+// echo '</div>';
+echo '</div>';
+echo '</div>';
+
+echo '</td>
+</tr>
+</table>';
+
+echo $this->form()->closeTag();
