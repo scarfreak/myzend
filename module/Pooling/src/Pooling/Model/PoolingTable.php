@@ -6,6 +6,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Select;  
+use Zend\Db\ResultSet\ResultSet;
 
 class PoolingTable
 {
@@ -38,6 +39,72 @@ class PoolingTable
 		$where->like('browser', $browser);
 		$resultSet = $this->tableGateway->select($where);
         return $resultSet;
+	}
+
+	public function getRecordCountAll()
+	{
+		$qryChrome = $this->tableGateway->select(function (Select $select){
+			$select->columns(array(
+					'Chrome' => new \Zend\Db\Sql\Expression('FORMAT(((COUNT(browser) / 100) * 100),0)')
+				));
+			$select->where('browser','Chrome');
+		});
+
+		$qrySafari = $this->tableGateway->select(function (Select $select){
+			$select->columns(array(
+					'Safari' => new \Zend\Db\Sql\Expression('FORMAT(((COUNT(browser) / 100) * 100),0)')
+				));
+			$select->where('browser','Safari');
+		});
+
+		$qryFirefox = $this->tableGateway->select(function (Select $select){
+			$select->columns(array(
+					'Firefox' => new \Zend\Db\Sql\Expression('FORMAT(((COUNT(browser) / 100) * 100),0)')
+				));
+			$select->where('browser','Firefox');
+		});
+
+		$qryIExplorer = $this->tableGateway->select(function (Select $select){
+			$select->columns(array(
+					'IExplorer' => new \Zend\Db\Sql\Expression('FORMAT(((COUNT(browser) / 100) * 100),0)')
+				));
+			$select->where('browser','IExplorer');
+		});
+
+		$qryOpera = $this->tableGateway->select(function (Select $select){
+			$select->columns(array(
+					'Opera' => new \Zend\Db\Sql\Expression('FORMAT(((COUNT(browser) / 100) * 100),0)')
+				));
+			$select->where('browser','Opera');
+		});
+
+		$qryLynx = $this->tableGateway->select(function (Select $select){
+			$select->columns(array(
+					'Lynx' => new \Zend\Db\Sql\Expression('FORMAT(((COUNT(browser) / 100) * 100),0)')
+				));
+			$select->where('browser','Lynx');
+		});
+
+		$mainselect = $this->tableGateway->select(function(Select $select){
+			$select->columns(array(
+					'Chrome' => array('?',array($qryChrome)),
+					'Safari' => array('?',array($qrySafari)),
+					'Firefox' => array('?',array($qryFirefox)),
+					'IExplorer' => array('?',array($qryIExplorer)),
+					'Opera' => array('?',array($qryOpera)),
+					'Lynx' => array('?',array($qryLynx)),
+				));
+			$select->group('browser');
+			$select->limit(0,1);
+		});
+
+		$statement = $this->tableGateway->prepareStatementForSqlObject($mainselect);
+		$comments = $statement->execute();
+		$resultSet = new resultSet();
+		$resultSet->initialize($comments);
+
+		return $resultSet->toArray();
+
 	}
 
 	public function getPooling($emailadd)

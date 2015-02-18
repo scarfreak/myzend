@@ -14,9 +14,9 @@
 return array(
 	'db' => array(
          'driver'         => 'Pdo',
-         'dsn'              => 'mysql:dbname=pooldb;host=localhost',
+         'dsn'              => 'mysql:dbname=pooldb;host=192.168.12.108',
          'username'         => 'root',
-         'password'         => '',
+         'password'         => 'mlinc1234',
          'driver_options' => array(
              PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
          ),

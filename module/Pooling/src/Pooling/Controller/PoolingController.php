@@ -18,6 +18,7 @@ class PoolingController extends AbstractActionController
 		return new ViewModel(array(
              'pools' => $this->getPoolingTable()->fetchAllfiltered(),
              'poolcounts' => $this->getPoolingTable()->fetchAll(),
+             'records' => $this->getPoolingTable()->getRecordCountAll(),
          ));
 	}
 

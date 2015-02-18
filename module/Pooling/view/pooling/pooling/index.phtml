@@ -5,10 +5,36 @@ $this->headTitle($title);
 <?php $counter=0; foreach ($poolcounts as $poolcount) :
      $counter = $counter + 1;
 endforeach; ?>
-<h1 style="text-indent: 0.2cm;">Total Voters:&nbsp;<?php echo $counter; ?></h1>
-<p style="text-indent: 0.4cm;">
-	<a href="<?php echo $this->url('pool', array('action'=>'choose'));?>">Choose your favorite browser</a>
+<table width="100%">
+<tr>
+<td valign="top">
+     <h1 style="text-indent: 0.2cm;">Total Voters:&nbsp;<?php echo $counter; ?></h1>
+     <p style="text-indent: 0.4cm;">
+     <a href="<?php echo $this->url('pool', array('action'=>'choose'));?>"><font style="font-size:16px;">Choose your favorite browser</font></a>
 </p>
+</td>
+<td style="float:right; padding-right:100px;">
+     <dl style="width: 350px">
+     <!-- <dd><div id="data-one" class="bar" style="width: 60%">Chrome - 60%</div></dd>
+     <dt>2009</dt>
+     <dd><div id="data-two" class="bar" style="width: 80%">Safari - 80%</div></dd>
+     <dt>2010</dt>
+     <dd><div id="data-three" class="bar" style="width: 64%">Firefox- 64%</div></dd>
+     <dt>2011</dt>
+     <dd><div id="data-four" class="bar" style="width: 97%">IExplorer - 97%</div></dd> -->
+     <?php foreach ($records as $record) : ?>
+     <dd><div id="data-one" class="bar" style="width: 60%">Chrome - <?php echo $this->excapeHtml($record->Chrome); ?></div></dd>
+     <dd><div id="data-one" class="bar" style="width: 60%">Chrome - <?php echo $this->excapeHtml($record->Safari); ?></div></dd>
+     <dd><div id="data-one" class="bar" style="width: 60%">Chrome - <?php echo $this->excapeHtml($record->Firefox); ?></div></dd>
+     <dd><div id="data-one" class="bar" style="width: 60%">Chrome - <?php echo $this->excapeHtml($record->IExplorer); ?></div></dd>
+     <dd><div id="data-one" class="bar" style="width: 60%">Chrome - <?php echo $this->excapeHtml($record->Opera); ?></div></dd>
+     <dd><div id="data-one" class="bar" style="width: 60%">Chrome - <?php echo $this->excapeHtml($record->Lynx); ?></div></dd>
+     <?php endforeach; ?>
+     </dl>
+</td>
+</tr>
+</table>
+
 <dl class="sub-nav">
 <dt>Filter:</dt>
 <dd class="active"><a href="<?php echo $this->url('pool');?>">All</a></dd>
@@ -37,3 +63,4 @@ endforeach; ?>
  </tr>
  <?php endforeach; ?>
  </table>
+ 
